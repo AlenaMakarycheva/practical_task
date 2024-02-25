@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: receiver
+
+server:
+  port: 8081
+
+responseDtoDef:
+  name: тест ответ
+  date: 25.02.2024
+  response: ответ

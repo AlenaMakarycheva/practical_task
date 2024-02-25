@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: sender
+server:
+  port: 8082
+catalog:
+  name: MovieCatalog
+
+crontab:
+  cronPing: 10 * * * * *
+  cronPong: 20 * * * * *
+
+
+requestDtoDef:
+  name: тест запрос
+  date: 25.02.2024
+  request: запрос
+
+url:
+  ping: http://localhost:8081/ping
+  pong: http://localhost:8081/pong
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,metrics
