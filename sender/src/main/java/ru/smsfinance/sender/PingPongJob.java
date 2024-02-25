@@ -24,20 +24,17 @@ public class PingPongJob {
     private final RequestDtoServices requestDtoServices;
 
     @Scheduled(cron = "${crontab.cronPing}")
-    public void getResponseDto()//ping
-    {
+    public void getResponseDto() {
         RestTemplate restTemplate = new RestTemplate();
-       // restTemplate.getForObject(appConfiguration.getUrlPing(), ResponseDto.class);
-        log.info("getResponseDto-{}",restTemplate.getForObject(appConfiguration.getUrlPing(), ResponseDto.class));
+        ResponseDto responseDto = restTemplate.getForObject(appConfiguration.getUrlPing(), ResponseDto.class);
+        log.info("getResponseDto-{}",responseDto);
     }
 
     @Scheduled(cron = "${crontab.cronPong}")
-    public void postResponseDto()//pong
-    {
+    public void postResponseDto() {
         RestTemplate restTemplate = new RestTemplate();
-        /*restTemplate.postForObject(appConfiguration.getUrlPong(),
-                requestDtoServices.getDefaultRequestDto(), ResponseDto.class);*/
-        log.info("postResponseDto-{}",restTemplate.postForObject(appConfiguration.getUrlPong(),
-                requestDtoServices.getDefaultRequestDto(), ResponseDto.class));
+        ResponseDto responseDto= restTemplate.postForObject(appConfiguration.getUrlPong(),
+                requestDtoServices.getDefaultRequestDto(), ResponseDto.class);
+        log.info("postResponseDto-{}",responseDto);
     }
 }
