@@ -36,6 +36,6 @@ private String response;
 1) library - модели данных
 2) receiver - сервис принимающий REST запросы, порт 8081
 3) sender - сервис отправляющий REST запрос, порт 8082
-  sender запускает запросы: ping каждую минуту в 10 секунд, pong каждую минуту в 20 секунд
+  sender запускает запросы: ping каждые 10 секунд, pong каждую минуту в 20 секунд
 
-Метрики,подключены с помощью активатора, доступны по адресу http://localhost:8082/actuator/metrics
+Метрики,подключены с помощью активатора, доступны по адресам http://localhost:8082/actuator/metrics http://localhost:8081/actuator/metrics
