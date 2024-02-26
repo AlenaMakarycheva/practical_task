@@ -38,4 +38,4 @@ private String response;
 3) sender - сервис отправляющий REST запрос, порт 8082
   sender запускает запросы: ping каждые 10 секунд, pong каждую минуту в 20 секунд
 
-Метрики,подключены с помощью активатора, доступны по адресам http://localhost:8082/actuator/metrics http://localhost:8081/actuator/metrics
+Метрики,подключены с помощью actuator, доступны по адресам http://localhost:8082/actuator/metrics http://localhost:8081/actuator/metrics
