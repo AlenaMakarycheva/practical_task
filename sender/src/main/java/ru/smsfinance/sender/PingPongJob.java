@@ -6,8 +6,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.smsfinance.library.model.ResponseDto;
-import ru.smsfinance.sender.configuration.AppConfiguration;
 import ru.smsfinance.sender.services.RequestDtoServices;
+import ru.smsfinance.sender.services.SenderServices;
 
 
 /**
@@ -20,21 +20,16 @@ import ru.smsfinance.sender.services.RequestDtoServices;
 @Slf4j
 public class PingPongJob {
 
-    private final AppConfiguration appConfiguration;
     private final RequestDtoServices requestDtoServices;
+    private final SenderServices senderServices;
 
-    @Scheduled(cron = "${crontab.cronPing}")
-    public void getResponseDto() {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseDto responseDto = restTemplate.getForObject(appConfiguration.getUrlPing(), ResponseDto.class);
-        log.info("getResponseDto-{}",responseDto);
+    @Scheduled(fixedDelayString = "${delayPing}")
+    public void getPing() {
+        log.info("ping-{}", senderServices.sendPing());
     }
 
-    @Scheduled(cron = "${crontab.cronPong}")
-    public void postResponseDto() {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseDto responseDto= restTemplate.postForObject(appConfiguration.getUrlPong(),
-                requestDtoServices.getDefaultRequestDto(), ResponseDto.class);
-        log.info("postResponseDto-{}",responseDto);
+    @Scheduled(cron = "${cronPong}")
+    public void getPong() {
+        log.info("pong-{}", senderServices.sendPong(requestDtoServices.getDefaultRequestDto()));
     }
 }

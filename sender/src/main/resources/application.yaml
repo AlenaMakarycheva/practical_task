@@ -6,10 +6,9 @@ server:
 catalog:
   name: MovieCatalog
 
-crontab:
-  cronPing: 10 * * * * *
-  cronPong: 20 * * * * *
-
+cronPing: 10 * * * * *
+cronPong: 20 * * * * *
+delayPing: 10000
 
 requestDtoDef:
   name: тест запрос
