@@ -38,4 +38,7 @@ private String response;
 3) sender - сервис отправляющий REST запрос, порт 8082
   sender запускает запросы: ping каждые 10 секунд, pong каждую минуту в 20 секунд
 
-Метрики,подключены с помощью actuator, доступны по адресам http://localhost:8082/actuator/metrics http://localhost:8081/actuator/metrics
+Добавлены тесты на проверку null и невалидных значений.
+
+Метрики,подключены с помощью actuator, доступны по адресам http://localhost:8082/actuator/prometheus http://localhost:8081/actuator/prometheus
+Добавлены свои метрики с помощью аннотации @Timed в receiver MainController.
