@@ -27,15 +27,15 @@ class SenderServicesTest {
     void nullPointerUrlTest() {
         Mockito.when(appConfiguration.getUrlPing()).thenReturn(null);
         Mockito.when(appConfiguration.getUrlPong()).thenReturn(null);
-        assertEquals(senderServices.sendPing(), null);
-        assertEquals(senderServices.sendPong(new RequestDto()), null);
+        assertNull(senderServices.sendPing());
+        assertNull(senderServices.sendPong(new RequestDto()));
     }
 
     @Test
     void invalidUrlTest() {
         Mockito.when(appConfiguration.getUrlPing()).thenReturn("qwerty");
         Mockito.when(appConfiguration.getUrlPong()).thenReturn("qwerty");
-        assertEquals(senderServices.sendPing(), null);
-        assertEquals(senderServices.sendPong(new RequestDto()), null);
+        assertNull(senderServices.sendPing());
+        assertNull(senderServices.sendPong(new RequestDto()));
     }
 }

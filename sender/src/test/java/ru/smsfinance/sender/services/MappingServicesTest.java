@@ -29,8 +29,8 @@ class MappingServicesTest {
         Mockito.when(requestDtoConfiguration.getDate()).thenReturn(null);
         Mockito.when(requestDtoConfiguration.getRequest()).thenReturn(null);
         RequestDto requestDto = mappingServices.getDefaultRequestDto();
-        assertEquals(requestDto.getName(), null);
-        assertEquals(requestDto.getDate(), null);
-        assertEquals(requestDto.getRequest(), null);
+        assertNull(requestDto.getName());
+        assertNull(requestDto.getDate());
+        assertNull(requestDto.getRequest());
     }
 }

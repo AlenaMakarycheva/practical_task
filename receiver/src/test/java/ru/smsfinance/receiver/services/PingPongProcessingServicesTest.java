@@ -34,9 +34,10 @@ class PingPongProcessingServicesTest {
         Mockito.when(responseDtoConfiguration.getDate()).thenReturn(null);
         Mockito.when(responseDtoConfiguration.getResponse()).thenReturn(null);
         ResponseDto responseDto = pingPongProcessingServices.getDefaultResponseDto();
-        assertEquals(responseDto.getName(), null);
-        assertEquals(responseDto.getDate(), null);
-        assertEquals(responseDto.getResponse(), null);
+
+        assertNull(responseDto.getName());
+        assertNull(responseDto.getDate());
+        assertNull(responseDto.getResponse());
     }
 
     @SneakyThrows
@@ -48,19 +49,20 @@ class PingPongProcessingServicesTest {
         Mockito.when(responseDtoConfiguration.getDate()).thenReturn(null);
         Mockito.when(responseDtoConfiguration.getResponse()).thenReturn(null);
         ResponseDto responseDto = pingPongProcessingServices.responseToPing();
-        assertEquals(responseDto.getName(), null);
-        assertEquals(responseDto.getDate(), null);
+        assertNull(responseDto.getName());
+        assertNull(responseDto.getDate());
         assertEquals(responseDto.getResponse(), FormattingUtil.formattingResponse(responseDto.getResponse(),field.get(pingPongProcessingServices)));
     }
 
     @Test
     void nullPointerPongTest() {
+        RequestDto requestDto = new RequestDto();
         Mockito.when(responseDtoConfiguration.getName()).thenReturn(null);
         Mockito.when(responseDtoConfiguration.getDate()).thenReturn(null);
         Mockito.when(responseDtoConfiguration.getResponse()).thenReturn(null);
-        ResponseDto responseDto = pingPongProcessingServices.responseToPong(new RequestDto());
-        assertEquals(responseDto.getName(), null);
-        assertEquals(responseDto.getDate(), null);
-        assertEquals(responseDto.getResponse(), FormattingUtil.formattingResponse(responseDto.getResponse(),new RequestDto()));
+        ResponseDto responseDto = pingPongProcessingServices.responseToPong(requestDto);
+        assertNull(responseDto.getName());
+        assertNull(responseDto.getDate());
+        assertEquals(responseDto.getResponse(), FormattingUtil.formattingResponse(responseDto.getResponse(),requestDto));
     }
 }

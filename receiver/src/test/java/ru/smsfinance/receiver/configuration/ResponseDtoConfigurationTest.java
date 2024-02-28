@@ -21,7 +21,7 @@ class ResponseDtoConfigurationTest {
 
     @Test
     void nullPointerDateTest() {
-        assertEquals(responseDtoConfiguration.getDate(), null);
+        assertNull(responseDtoConfiguration.getDate());
     }
 
     @SneakyThrows
@@ -30,7 +30,7 @@ class ResponseDtoConfigurationTest {
         Field field = responseDtoConfiguration.getClass().getDeclaredField("date");
         field.setAccessible(true);
         field.set(responseDtoConfiguration, "qwerty");
-        assertEquals(responseDtoConfiguration.getDate(), null);
+        assertNull(responseDtoConfiguration.getDate());
     }
 
 }
