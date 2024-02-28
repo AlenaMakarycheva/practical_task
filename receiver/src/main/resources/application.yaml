@@ -8,4 +8,14 @@ server:
 responseDtoDef:
   name: тест ответ
   date: 25.02.2024
-  response: ответ
+  response: ответ на %s
+
+management:
+  endpoints.web.exposure.include: health,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true

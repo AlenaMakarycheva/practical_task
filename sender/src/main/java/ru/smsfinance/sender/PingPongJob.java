@@ -1,12 +1,11 @@
 package ru.smsfinance.sender;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import ru.smsfinance.library.model.ResponseDto;
-import ru.smsfinance.sender.services.RequestDtoServices;
+import ru.smsfinance.sender.services.MappingServices;
 import ru.smsfinance.sender.services.SenderServices;
 
 
@@ -20,7 +19,7 @@ import ru.smsfinance.sender.services.SenderServices;
 @Slf4j
 public class PingPongJob {
 
-    private final RequestDtoServices requestDtoServices;
+    private final MappingServices mappingServices;
     private final SenderServices senderServices;
 
     @Scheduled(fixedDelayString = "${delayPing}")
@@ -30,6 +29,6 @@ public class PingPongJob {
 
     @Scheduled(cron = "${cronPong}")
     public void getPong() {
-        log.info("pong-{}", senderServices.sendPong(requestDtoServices.getDefaultRequestDto()));
+        log.info("pong-{}", senderServices.sendPong(mappingServices.getDefaultRequestDto()));
     }
 }

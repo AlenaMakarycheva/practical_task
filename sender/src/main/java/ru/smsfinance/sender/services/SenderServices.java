@@ -1,5 +1,6 @@
 package ru.smsfinance.sender.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -8,6 +9,7 @@ import ru.smsfinance.library.model.ResponseDto;
 import ru.smsfinance.sender.configuration.AppConfiguration;
 
 @Service
+@Slf4j
 public class SenderServices {
 
     @Autowired
@@ -18,11 +20,21 @@ public class SenderServices {
 
 
     public ResponseDto sendPing() {
-        return restTemplate.getForObject(appConfiguration.getUrlPing(), ResponseDto.class);
+        try {
+            return restTemplate.getForObject(appConfiguration.getUrlPing(), ResponseDto.class);
+        } catch (IllegalArgumentException | NullPointerException e) {
+            log.error("Проблемы с конфигурацией. url.ping некорректный ", e);
+            return null;
+        }
     }
 
     public ResponseDto sendPong(RequestDto requestDto) {
-        return restTemplate.postForObject(appConfiguration.getUrlPong(),
-                requestDto, ResponseDto.class);
+        try {
+            return restTemplate.postForObject(appConfiguration.getUrlPong(),
+                    requestDto, ResponseDto.class);
+        } catch (IllegalArgumentException | NullPointerException e) {
+            log.error("Проблемы с конфигурацией. url.pong некорректный ", e);
+            return null;
+        }
     }
 }

@@ -3,8 +3,6 @@ spring:
     name: sender
 server:
   port: 8082
-catalog:
-  name: MovieCatalog
 
 cronPing: 10 * * * * *
 cronPong: 20 * * * * *
@@ -20,7 +18,11 @@ url:
   pong: http://localhost:8081/pong
 
 management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,env,metrics
+  endpoints.web.exposure.include: health,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true

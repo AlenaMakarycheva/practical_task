@@ -1,10 +1,10 @@
 package ru.smsfinance.receiver.configuration;
 
 
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,9 +24,12 @@ public class ResponseDtoConfiguration {
         return name;
     }
 
-    @SneakyThrows
     public Date getDate() {
-        return new SimpleDateFormat("dd.MM.yyyy").parse(date);
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(date);
+        } catch (ParseException | NullPointerException e) {
+            return null;
+        }
     }
 
     public String getResponse() {
